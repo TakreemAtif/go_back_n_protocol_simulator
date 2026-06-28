@@ -1,150 +1,82 @@
 # Go-Back-N Protocol Simulator
 
-A Java-based implementation of the **Go-Back-N (GBN) Automatic Repeat Request (ARQ)** protocol that simulates reliable data transmission over UDP. The project demonstrates how reliable communication can be achieved on top of an unreliable transport protocol by implementing retransmission, acknowledgments, and error handling mechanisms.
-
----
+This project is a Java implementation of the Go-Back-N (GBN) Automatic Repeat Request (ARQ) protocol using UDP sockets. It demonstrates how reliable data transmission can be achieved over an unreliable network by implementing retransmission and acknowledgment mechanisms.
 
 ## Features
 
-- Go-Back-N sliding window protocol implementation
-- Reliable data transmission over UDP sockets
-- Configurable sliding window size
-- Configurable number of packets
+- Go-Back-N sliding window implementation
+- Reliable data transfer over UDP
+- Configurable window size and number of packets
 - Checksum-based error detection
 - Timeout-based retransmission
 - Fast retransmission using duplicate ACKs
-- Client-server communication model
 - Session reset and graceful connection termination
 
----
+## Network Scenarios
 
-## Simulated Network Scenarios
+The simulator can demonstrate:
 
-The simulator supports the following scenarios:
+- Normal packet transmission
+- Packet loss
+- ACK loss
+- Packet corruption
+- Delayed acknowledgments
+- Fast retransmission
+- Custom packet count and window size
 
-1. Simple Transmission
-2. Packet Loss
-3. ACK Loss
-4. Packet Corruption
-5. Delayed ACK
-6. Fast Retransmission
-7. Custom Packet Count and Window Size
-
-These scenarios help demonstrate how the Go-Back-N protocol recovers from common network failures.
-
----
-
-## Technologies Used
+## Technologies
 
 - Java
 - UDP Socket Programming
-- DatagramSocket
-- DatagramPacket
+- DatagramSocket & DatagramPacket
 - Computer Networks
 - Go-Back-N ARQ Protocol
 
----
-
-## Project Structure
-
-```
-├── Client.java
-├── Server.java
-├── Client.class
-├── Server.class
-└── README.md
-```
-
----
-
-## How It Works
-
-### Server
-- Listens for incoming UDP packets.
-- Validates packet headers and checksums.
-- Sends ACK or NAK responses.
-- Simulates delayed acknowledgments.
-- Handles RESET and END control packets.
-
-### Client
-- Sends packets using the Go-Back-N sliding window algorithm.
-- Waits for acknowledgments.
-- Retransmits packets after timeout.
-- Performs fast retransmission after three duplicate ACKs.
-- Simulates packet loss, ACK loss, and packet corruption.
-
----
-
-## Packet Format
-
-Each packet contains a custom header:
-
-```
-<SeqNo:x><Length:y><CheckSum:z><Type:Data>|Payload
-```
-
-Header fields include:
-
-- Sequence Number
-- Payload Length
-- Checksum
-- Packet Type (Data, DELAYACK, RESET, END)
-
----
-
 ## Running the Project
 
-### 1. Compile
+Compile both files:
 
 ```bash
 javac Server.java
 javac Client.java
 ```
 
-### 2. Start the Server
+Start the server:
 
 ```bash
 java Server
 ```
 
-### 3. Start the Client
+Start the client in another terminal:
 
 ```bash
 java Client
 ```
 
-### 4. Select a Simulation Scenario
+Select one of the available scenarios and enter the messages you want to transmit.
 
-The client allows you to choose one of the supported network scenarios before transmitting data.
+## Project Structure
 
----
+```
+Client.java      // Sender implementing Go-Back-N
+Server.java      // Receiver handling ACKs and NAKs
+```
 
-## Learning Outcomes
+## What I Learned
 
-This project demonstrates:
+Through this project, I gained practical experience with:
 
-- Reliable Data Transfer
-- Go-Back-N Sliding Window Protocol
-- UDP Socket Programming
-- Error Detection using Checksums
-- Timeout and Retransmission Mechanisms
-- Fast Retransmit
-- Network Failure Simulation
-- Client-Server Communication
-
----
+- Reliable data transfer protocols
+- Sliding window algorithms
+- UDP socket programming
+- Error detection using checksums
+- Timeout and retransmission strategies
+- Client-server communication
 
 ## Future Improvements
 
-- Selective Repeat ARQ implementation
-- Graphical User Interface (GUI)
-- Packet transmission statistics
-- Performance analysis (throughput and delay)
-- Multi-client support
-- Logging and visualization
-
----
-
-## Author
-
-Developed as part of a Computer Networks course project to demonstrate reliable data transmission using the Go-Back-N ARQ protocol in Java.
+- Implement Selective Repeat ARQ
+- Add a graphical user interface
+- Support multiple clients
+- Display transmission statistics
+- Measure protocol performance under different network conditions
